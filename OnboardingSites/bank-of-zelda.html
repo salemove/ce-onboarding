@@ -36,7 +36,6 @@
         }
         nav a:hover { color: #ffd700; }
         
-        /* NOISE: Ticker and Banners */
         .rupee-ticker {
             background-color: #111;
             color: #2ecc71;
@@ -56,7 +55,6 @@
             100% { transform: translate(-100%, 0); }
         }
 
-        /* NOISE: Complex Layout */
         .page-wrapper {
             display: flex;
             max-width: 1200px;
@@ -88,8 +86,6 @@
         }
         h1 { margin: 0; font-size: 3em; text-transform: uppercase; letter-spacing: 3px; }
         .triforce { font-size: 40px; color: #ffd700; line-height: 0.8; margin-bottom: 15px;}
-        
-        /* THE TRAP: Deeply nested and unstyled to hide the iframe boundary */
         .secure-module-wrapper { width: 100%; }
         .banking-application-layer { width: 100%; }
         .portal-container { margin-top: 20px; width: 100%; }
@@ -161,16 +157,5 @@
         </main>
     </div>
 
-    <script>
-        setTimeout(() => {
-            console.error("Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://api.hyrule-analytics.net/v1/track. (Reason: CORS header 'Access-Control-Allow-Origin' missing).");
-            
-            console.error("Content Security Policy: The page’s settings blocked the loading of a resource at inline ('script-src').");
-            
-            console.warn("[Glia/Salemove] Warning Internal App: Visitor ID not immediately resolved from Sheikah LocalStorage. Falling back to anonymous session tracking.");
-            
-            console.warn("Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.");
-        }, 1500); 
-    </script>
 </body>
 </html>
