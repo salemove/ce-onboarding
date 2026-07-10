@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.glia.com 'unsafe-inline' 'unsafe-eval'; frame-src *;">
+    <title>Hyrule Marketplace - Bank of Zelda</title>
+    
+    <script async src="https://api.glia.com/salemove_integration.js?site_id=5723d520-4e22-4b38-a506-edc64e0e9e61"></script>
+    
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Georgia', serif; 
+            background-color: #f4ebd0; 
+            color: #2c3e50; 
+        }
+        header { 
+            background-color: #1d4e28; 
+            color: #ffd700; 
+            padding: 30px; 
+            text-align: center; 
+            border-bottom: 5px solid #b8860b; 
+        }
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            background-color: #2c5e3a; 
+            padding: 15px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 0 20px; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+        }
+        nav a:hover { color: #ffd700; }
+        
+        /* NOISE: Ticker and Banners */
+        .rupee-ticker {
+            background-color: #111;
+            color: #2ecc71;
+            padding: 10px;
+            font-family: monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .rupee-ticker span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 20s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* NOISE: Complex Layout */
+        .page-wrapper {
+            display: flex;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            gap: 30px;
+        }
+        .sidebar {
+            flex: 1;
+            background: #e8dcb8;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #c8b888;
+            height: fit-content;
+        }
+        .sidebar h3 { color: #1d4e28; margin-top: 0; }
+        .sidebar ul { padding-left: 20px; }
+        
+        .main-content {
+            flex: 3;
+            text-align: center;
+        }
+        .promo-banner {
+            background-color: #b8860b;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        h1 { margin: 0; font-size: 3em; text-transform: uppercase; letter-spacing: 3px; }
+        .triforce { font-size: 40px; color: #ffd700; line-height: 0.8; margin-bottom: 15px;}
+        
+        /* THE TRAP: Deeply nested and unstyled to hide the iframe boundary */
+        .secure-module-wrapper { width: 100%; }
+        .banking-application-layer { width: 100%; }
+        .portal-container { margin-top: 20px; width: 100%; }
+        
+        iframe { 
+            width: 100%; 
+            height: 700px; 
+            border: none; 
+            overflow: hidden; 
+            background-color: transparent; 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="triforce">▲<br>▲ ▲</div>
+        <h1>Bank of Zelda</h1>
+        <p>Securing Hyrule's Wealth Since the Era of Myth</p>
+    </header>
+
+    <div class="rupee-ticker">
+        <span>EXCHANGE RATES: 1 Green Rupee = 1.00 Hylian Credits | 1 Blue Rupee = 5.00 Hylian Credits | 1 Red Rupee = 20.00 Hylian Credits | Gold Skulltula Tokens currently fluctuating | WARNING: Blood Moon approaching, market volatility expected.</span>
+    </div>
+
+    <nav>
+        <a href="#">Bazaar</a>
+        <a href="#">Potion Shop</a>
+        <a href="#">Bombchu Bowling</a>
+        <a href="#">Bank Services</a>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <h3>Latest News</h3>
+            <ul>
+                <li>Interest rates rise in Kakariko Village.</li>
+                <li>Zora's Domain announces new aquatic insurance policies.</li>
+                <li><strong>Alert:</strong> Counterfeit Rupees found in Gerudo Town.</li>
+            </ul>
+            <hr>
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Report a stolen wallet</a></li>
+                <li><a href="#">Mortgages for Treehouses</a></li>
+                <li><a href="#">Sheikah Slate Pay Setup</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="promo-banner">
+                <h2>Open a Premium Giant's Wallet Account Today!</h2>
+                <p>Earn 5% APY and receive a complimentary cucco. Restrictions apply.</p>
+            </div>
+
+            <h2>Welcome to the Hyrule Marketplace!</h2>
+            <p>Whether you are saving up for a Hylian Shield or need to finance a new Loftwing, the Bank of Zelda has you covered. Please use our highly secure portal below to apply for your Royal Loan.</p>
+            
+            <div id="react-root-mount">
+                <div class="secure-module-wrapper">
+                    <div class="banking-application-layer">
+                        <div class="portal-container">
+                            <iframe src="bank-of-zelda-embedded.html" title="Royal Loan Application Portal"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            console.error("Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://api.hyrule-analytics.net/v1/track. (Reason: CORS header 'Access-Control-Allow-Origin' missing).");
+            
+            console.error("Content Security Policy: The page’s settings blocked the loading of a resource at inline ('script-src').");
+            
+            console.warn("[Glia/Salemove] Warning Internal App: Visitor ID not immediately resolved from Sheikah LocalStorage. Falling back to anonymous session tracking.");
+            
+            console.warn("Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.");
+        }, 1500); // Delayed slightly so it pops up actively while they are inspecting
+    </script>
+</body>
+</html>
