@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.glia.com 'unsafe-inline' 'unsafe-eval'; frame-src *;">
     <title>Hyrule Marketplace - Bank of Zelda</title>
+    
     <style>
         body { 
             margin: 0; 
@@ -170,7 +170,7 @@
             console.warn("[Glia/Salemove] Warning Internal App: Visitor ID not immediately resolved from Sheikah LocalStorage. Falling back to anonymous session tracking.");
             
             console.warn("Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.");
-        }, 1500); // Delayed slightly so it pops up actively while they are inspecting
+        }, 1500); 
     </script>
 </body>
 </html>
