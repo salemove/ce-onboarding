@@ -157,5 +157,16 @@
         </main>
     </div>
 
+    <script>
+        setTimeout(() => {
+            console.error("Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://api.hyrule-analytics.net/v1/track. (Reason: CORS header 'Access-Control-Allow-Origin' missing).");
+            
+            console.error("Content Security Policy: The page’s settings blocked the loading of a resource at inline ('script-src').");
+            
+            console.warn("[Glia/Salemove] Warning Internal App: Visitor ID not immediately resolved from Sheikah LocalStorage. Falling back to anonymous session tracking.");
+            
+            console.warn("Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.");
+        }, 1500); 
+    </script>
 </body>
 </html>
