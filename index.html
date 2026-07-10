@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network & Architecture Troubleshooting Lab</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a0b2e; /* Deep dark purple */
+            color: #E6E6FA; /* Lilac */
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #FF007F; /* Glia Pink */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .lab-container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(230, 230, 250, 0.05);
+            border: 1px solid #FF007F;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+        }
+
+        /* Custom Dropdown using Details/Summary */
+        details {
+            margin-bottom: 15px;
+            background: #2d164f; /* Lighter purple */
+            border-radius: 8px;
+            overflow: hidden;
+            border-left: 4px solid #39FF14; /* Neon Green accent */
+        }
+
+        summary {
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #E6E6FA;
+            transition: background 0.3s;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary:hover {
+            background: #3a1c66;
+        }
+
+        summary::after {
+            content: '▼';
+            color: #FF007F;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            padding: 10px 0;
+            background: #1a0b2e;
+            border-top: 1px solid rgba(230, 230, 250, 0.1);
+        }
+
+        .exercise-link {
+            display: block;
+            padding: 12px 20px;
+            color: #E6E6FA;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .exercise-link:hover {
+            background: rgba(57, 255, 20, 0.1);
+            color: #39FF14; /* Neon Green */
+            border-left: 3px solid #39FF14;
+            padding-left: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Client Engineering Onboarding - Mock Tickets</h1>
+
+    <div class="lab-container">
+
+        <details open> <summary>Complexity 2</summary>
+            <div class="dropdown-content">
+                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
+                    &#128274; Future Exercise (Locked)
+                </a>
+            </div>
+        </details>
+
+        <details open> <summary>Complexity 3</summary>
+            <div class="dropdown-content">
+                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
+                    &#128274; Future Exercise (Locked)
+                </a>
+            </div>
+        </details>
+        
+        <details open> <summary>Complexity 4</summary>
+            <div class="dropdown-content">
+                <a href="OnboardingSites/bank-of-aang.html" class="exercise-link">
+                    &#128187; 4.1 - Bank of Aang
+                </a>
+                <a href="OnboardingSites/bank-of-aang.html" class="exercise-link">
+                    &#128187; 4.2 - Ruys Bank
+                </a>
+                <a href="OnboardingSites/bank-of-aang.html" class="exercise-link">
+                    &#128187; 4.3 - Bank of Zelda
+                </a>
+                <a href="OnboardingSites/bank-of-aang.html" class="exercise-link">
+                    &#128187; 4.4 - TBD - Call
+                </a>
+                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
+                    &#128274; Future Exercise (Locked)
+                </a>
+            </div>
+        </details>
+
+        <details>
+            <summary>ATLAS Internship - API & Integrations</summary>
+            <div class="dropdown-content">
+                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
+                    &#128274; Modules Coming Soon
+                </a>
+            </div>
+        </details>
+
+    </div>
+
+</body>
+</html>
