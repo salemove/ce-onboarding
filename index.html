@@ -3,156 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network & Architecture Troubleshooting Lab</title>
+    <title>Glia Client Engineering</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/automations.css">
+    <link rel="stylesheet" href="./css/tool-page.css">
+    
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a0b2e; /* Deep dark purple */
-            color: #E6E6FA; /* Lilac */
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        h1 {
-            color: #FF007F; /* Glia Pink */
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
-            margin-bottom: 40px;
-        }
-
-        .lab-container {
-            width: 100%;
-            max-width: 600px;
-            background: rgba(230, 230, 250, 0.05);
-            border: 1px solid #FF007F;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
-        }
-
-        /* Custom Dropdown using Details/Summary */
-        details {
-            margin-bottom: 15px;
-            background: #2d164f; /* Lighter purple */
+        /* Estilos específicos para los Accordions del Lab */
+        .complexity-group {
+            margin-bottom: 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
             border-radius: 8px;
             overflow: hidden;
-            border-left: 4px solid #39FF14; /* Neon Green accent */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        summary {
-            padding: 15px 20px;
-            font-size: 18px;
-            font-weight: bold;
+        .complexity-summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
             cursor: pointer;
-            list-style: none;
+            background: var(--gray-50);
+            color: var(--gray-900);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            color: #E6E6FA;
-            transition: background 0.3s;
+            justify-content: space-between;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.2s;
+            list-style: none;
         }
 
-        summary::-webkit-details-marker {
+        .complexity-summary::-webkit-details-marker {
             display: none;
         }
 
-        summary:hover {
-            background: #3a1c66;
+        .complexity-summary:hover {
+            background: var(--gray-100);
         }
 
-        summary::after {
+        .complexity-group[open] .complexity-summary {
+            border-bottom-color: var(--gray-200);
+        }
+
+        .complexity-summary::after {
             content: '▼';
-            color: #FF007F;
-            font-size: 14px;
+            font-size: 0.875rem;
+            color: var(--primary);
             transition: transform 0.3s;
         }
 
-        details[open] summary::after {
+        .complexity-group[open] .complexity-summary::after {
             transform: rotate(180deg);
         }
 
-        .dropdown-content {
-            padding: 10px 0;
-            background: #1a0b2e;
-            border-top: 1px solid rgba(230, 230, 250, 0.1);
+        .complexity-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .exercise-link {
-            display: block;
-            padding: 12px 20px;
-            color: #E6E6FA;
-            text-decoration: none;
-            font-size: 16px;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
+        /* Estilos para las Tarjetas de los Tickets (Sub-Accordions) */
+        .ticket-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            background: var(--white);
+            overflow: hidden;
+            transition: border-color 0.2s;
         }
 
-        .exercise-link:hover {
-            background: rgba(57, 255, 20, 0.1);
-            color: #39FF14; /* Neon Green */
-            border-left: 3px solid #39FF14;
-            padding-left: 25px;
+        .ticket-card:hover {
+            border-color: var(--primary-light);
+        }
+
+        .ticket-summary {
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background-color 0.2s;
+            list-style: none;
+            color: var(--gray-900);
+        }
+
+        .ticket-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .ticket-summary:hover {
+            background: var(--gray-50);
+        }
+
+        .ticket-summary::before {
+            content: '🎫';
+            font-size: 1.25rem;
+        }
+
+        .ticket-card[open] .ticket-summary {
+            border-bottom: 1px solid var(--gray-100);
+            color: var(--primary);
+        }
+
+        /* Contenido del Ticket */
+        .ticket-body {
+            padding: 1.5rem;
+            background: var(--white);
+            font-size: 0.875rem;
+            color: var(--gray-700);
+        }
+
+        .message-block {
+            background: var(--gray-50);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .message-block.lm-message {
+            border-left-color: var(--status-warning);
+        }
+
+        .message-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-data {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            background: var(--gray-50);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .code-block {
+            background: var(--gray-900);
+            color: #00ff41;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.75rem;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+            white-space: pre-wrap;
+        }
+
+        /* Locked Exercises */
+        .locked-card {
+            opacity: 0.6;
+            pointer-events: none;
+            background: var(--gray-50);
+        }
+        
+        .locked-card .ticket-summary::before {
+            content: '🔒';
+        }
+
+        .action-footer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--gray-200);
+            display: flex;
+            justify-content: flex-end;
         }
     </style>
 </head>
 <body>
 
-    <h1>Client Engineering Onboarding - Mock Tickets</h1>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="back-link">← Back</a>
+            <span class="team-badge">Onboarding Mock Tickets</span>
+        </div>
+    </header>
 
-    <div class="lab-container">
+    <main class="container" style="max-width: 900px;">
+        <h2 class="section-title" style="margin-bottom: 2rem;">Troubleshooting Lab</h2>
 
-        <details open> <summary>Complexity 2</summary>
-            <div class="dropdown-content">
-                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
-                    &#128274; Future Exercise (Locked)
-                </a>
+        <!-- Complexity 2 -->
+        <details class="complexity-group">
+            <summary class="complexity-summary">Complexity 2</summary>
+            <div class="complexity-content">
+                <div class="ticket-card locked-card">
+                    <div class="ticket-summary">Future Exercise (Locked)</div>
+                </div>
             </div>
         </details>
 
-        <details open> <summary>Complexity 3</summary>
-            <div class="dropdown-content">
-                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
-                    &#128274; Future Exercise (Locked)
-                </a>
-            </div>
-        </details>
-        
-        <details open> <summary>Complexity 4</summary>
-            <div class="dropdown-content">
-                <a href="OnboardingSites/bank-of-aang.html" class="exercise-link">
-                    &#128187; 4.1 - Bank of Aang
-                </a>
-                <a href="OnboardingSites/bank-of-aang.html" class="exercise-link">
-                    &#128187; 4.2 - Ruys Bank
-                </a>
-                <a href="OnboardingSites/bank-of-zelda.html" class="exercise-link">
-                    &#128187; 4.3 - Bank of Zelda
-                </a>
-                <a href="OnboardingSites/bank-of-aang.html" class="exercise-link">
-                    &#128187; 4.4 - TBD - Call
-                </a>
-                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
-                    &#128274; Future Exercise (Locked)
-                </a>
+        <!-- Complexity 3 -->
+        <details class="complexity-group">
+            <summary class="complexity-summary">Complexity 3</summary>
+            <div class="complexity-content">
+                <div class="ticket-card locked-card">
+                    <div class="ticket-summary">Future Exercise (Locked)</div>
+                </div>
             </div>
         </details>
 
-        <details>
-            <summary>ATLAS Internship - API & Integrations</summary>
-            <div class="dropdown-content">
-                <a href="#" class="exercise-link" style="opacity: 0.5; pointer-events: none;">
-                    &#128274; Modules Coming Soon
-                </a>
+        <!-- Complexity 4 (ACTIVE) -->
+        <details class="complexity-group" open>
+            <summary class="complexity-summary">Complexity 4</summary>
+            <div class="complexity-content">
+
+                <!-- Ticket 4.1 -->
+                <details class="ticket-card">
+                    <summary class="ticket-summary">Ticket 4.1: Bank of Aang</summary>
+                    <div class="ticket-body">
+                        
+                        <div class="meta-data">
+                            <span class="meta-label">Site:</span> 
+                            <span>CE Onboarding - Bank of Aang</span>
+                        </div>
+
+                        <div class="message-block">
+                            <div class="message-title">👤 Client's Message</div>
+                            <p>Escalation! Our Launch Manager created a new VA called 'Aaang' for our Bank of Aang Site – 635af910-adb3-4a67-993e-c85cd6af02ed, and they told us that the pagination for the Bank Integration operations are paginated to 5, but Deposits and Money Movements are reflecting always 10. If lying like fire benders is the way to treat your clients, we better consider our provider next time. Fix this! Your platform is literally flooding our clients with text!</p>
+                        </div>
+
+                        <div class="message-block lm-message">
+                            <div class="message-title">👔 Launch Manager's Message</div>
+                            <p>Hey CE! I did request the change for that pagination from 10 to 5 for Money Movements and Deposits. I don’t know what is going on! Can you please check the bot’s config for me? I am vacationing on Earth’s Kingdom and Azula just burned the ferry down! I cannot provide an Engagement ID for evidence. I just know that the bot code is <code>bankofaang-public-prod</code>.</p>
+                        </div>
+
+                        <div class="action-footer">
+                            <a href="https://salemove.github.io/ce-onboarding/OnboardingSites/bank-of-aang.html" target="_blank" class="btn btn-primary">Launch Lab 🚀</a>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Ticket 4.2 -->
+                <details class="ticket-card">
+                    <summary class="ticket-summary">Ticket 4.2: Bank of Ruy</summary>
+                    <div class="ticket-body">
+                        
+                        <div class="meta-data">
+                            <span class="meta-label">Site:</span> <span>CE Onboarding - Ruys Bank</span>
+                            <span class="meta-label">Access from:</span> <span>Client Assist (Account: Glia CE Onboarding)</span>
+                            <span class="meta-label">User:</span> <span></span>
+                            <span class="meta-label">Pass:</span> <span></span>
+                        </div>
+
+                        <div class="message-block">
+                            <div class="message-title">👤 Client's Message</div>
+                            <p>Our highly anticipated AI launch is a disaster! We turned on the GVA in production 10 minutes ago, and it's just staring at visitors. It answers only with error messages. We paid for AI, not trash. We're turning it off and escalating to our Account Executive in 30 minutes if this isn't solved!</p>
+                        </div>
+
+                        <div class="message-block lm-message">
+                            <div class="message-title">👔 Launch Manager's Message</div>
+                            <p>Hi CE! I helped during the launch process for Ruys bank! I don’t know what is going on! I swear everything looks like it’s configured correctly inside of the Glia Hub site. However, I am a little worried that the original GVA was provisioned incorrectly, as I cannot see the custom user goals that we already worked with the AICs. We expect the User Goals to come from <code>ruy-internal-one</code>.</p>
+                            <br>
+                            <p>Could you please help me with the following:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                                <li>Confirm the GVA was provisioned correctly.</li>
+                                <li>Respond to the customer to identify why it is not responding? Even if the UGs are not custom, I expect it to respond.</li>
+                            </ul>
+                            <p>From the CE-1234, I notice that this is the provision script that it was used:</p>
+                            
+                            <div class="code-block">zsh provision_bot.sh \
+env=prod \
+client_name=ruys-bank-chat \
+language_country=en-US \
+bot_category=customer \
+gva_type=CHAT \
+cms_base_customer_name=banking-digital-en \
+atlas_existing_customer=banking-digital-en \
+big_enabled=TRUE \
+use_template_content=TRUE \
+copy_instance_usergoals=TRUE \
+domain=banking \
+gva_generation=GEN-2 \
+account_id=bc1c3764-c7fe-4a68-8b73-c2c5d600829f \
+site_id=a4aab2f9-e9b6-4a6c-8741-1f3130fc733a \</div>
+                        </div>
+
+                        <div class="action-footer">
+                            <a href="https://ruyca-glia.github.io/internship_sites_2/" target="_blank" class="btn btn-primary">Launch Lab 🚀</a>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Ticket 4.3 -->
+                <details class="ticket-card">
+                    <summary class="ticket-summary">Ticket 4.3: Bank of Zelda</summary>
+                    <div class="ticket-body">
+                        
+                        <div class="meta-data">
+                            <span class="meta-label">Site:</span> <span>CE Onboarding - Bank of Zelda</span>
+                            <span class="meta-label">Access from:</span> <span>Client Assist (Account: Glia CE Onboarding)</span>
+                        </div>
+
+                        <div class="message-block">
+                            <div class="message-title">👤 Client's Message</div>
+                            <p>"Why does your system work worse than a broken Legendary Sword? When visitors are browsing our main Hyrule Marketplace site, CoBrowsing works perfectly. But the second they step into the 'Apply for a Royal Loan' portal, the operator goes completely blind on what the visitor is entering or selecting on the form—it's like they've been trapped in a Dark Dungeon. They can't see a single thing they are typing!</p>
+                            <p style="margin-top: 0.5rem;">Your sales team promised seamless CoBrowsing across the entire kingdom. Why is our most important page acting like it's blocked by a Gossip Stone? Fix this, or we're taking our Rupees elsewhere!"</p>
+                        </div>
+
+                        <div class="message-block lm-message">
+                            <div class="message-title">👔 Launch Manager's Message</div>
+                            <p>"Hey there CE! This is very weird! Cobrowsing shows successfully on other pages of the client but in this one. It looks like this might be a CORS or CSP issue, but I may be adding noise here. I think it is best if you somehow see this for yourself."</p>
+                        </div>
+
+                        <div class="action-footer">
+                            <a href="https://salemove.github.io/ce-onboarding/OnboardingSites/bank-of-zelda.html" target="_blank" class="btn btn-primary">Launch Lab 🚀</a>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Ticket 4.4 -->
+                <details class="ticket-card">
+                    <summary class="ticket-summary">Ticket 4.4: Bank of Blockcraft</summary>
+                    <div class="ticket-body">
+                        
+                        <div class="meta-data">
+                            <span class="meta-label">Site:</span> <span>CE Onboarding - Bank of Blockcraft</span>
+                            <span class="meta-label">Access from:</span> <span>Client Assist (Account: Glia CE Onboarding)</span>
+                        </div>
+
+                        <div class="message-block">
+                            <div class="message-title">👤 Client's Message (URGENT)</div>
+                            <p><strong>URGENT — Chat widget stuck in English after our website relaunch</strong></p>
+                            <p style="margin-top: 0.5rem;">Hi Glia team,</p>
+                            <p style="margin-top: 0.5rem;">I'm Steve, Digital Channels Lead at Blockcraft Bank. Last Tuesday we relaunched our public website, and since then the Glia chat widget refuses to display in Spanish. Roughly 40% of our visitors bank in Spanish, and right now they're angrier than a provoked Enderman.</p>
+                            <p style="margin-top: 0.5rem;"><strong>What we're seeing:</strong><br>
+                            The rest of the site translates fine — when a visitor selects Spanish, all our pages show correctly in Spanish. But the chat bubble, queue messages, and pre-chat form stay in English no matter what. Nothing about our Glia setup changed during the relaunch; we copied the integration script over exactly as it was, and it worked perfectly on the old site for over a year.</p>
+                            <p style="margin-top: 0.5rem;">One strange detail: a colleague opened the site from an old bookmarked link and swears the widget appeared in Spanish. But when I navigate normally and pick Spanish from the menu, it's English every time. Another agent also mentioned that a visitor who somehow did get Spanish flipped back to English mid-session, right after their first chat ended, without touching anything.</p>
+                            <p style="margin-top: 0.5rem;">We'd appreciate a fast turnaround on this. Our vault is full of emeralds but our patience chest is nearly empty.</p>
+                            <p style="margin-top: 0.5rem;">Thanks,<br>
+                            <strong>Steve Piedrez</strong><br>
+                            Digital Channels Lead, Bank of Steve<br>
+                            <em>"Never dig straight down, never deploy on Friday."</em></p>
+                        </div>
+
+                        <div class="action-footer">
+                            <a href="https://ruyca-glia.github.io/internship_sites_4/" target="_blank" class="btn btn-primary">Launch Lab 🚀</a>
+                        </div>
+                    </div>
+                </details>
+
             </div>
         </details>
 
-    </div>
+        <!-- Internship (Locked) -->
+        <details class="complexity-group">
+            <summary class="complexity-summary">ATLAS Internship - API & Integrations</summary>
+            <div class="complexity-content">
+                <div class="ticket-card locked-card">
+                    <div class="ticket-summary">Modules Coming Soon</div>
+                </div>
+            </div>
+        </details>
+
+    </main>
+
+        <footer class="footer">
+            <p>Found an issue with the toolkit? 🧰<br> Report it
+                <a href="https://salemove.slack.com/archives/C0AC1SCTZ62" target="_blank"
+                    rel="noopener noreferrer">here</a>
+            </p>
+        </footer>
 
 </body>
 </html>
