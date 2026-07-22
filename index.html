@@ -9,7 +9,88 @@
     <link rel="stylesheet" href="./src/css/tool-page.css">
     
     <style>
-        /* Estilos específicos para los Accordions del Lab */
+        /* =========================================================
+           Guidelines Panel Styles
+           ========================================================= */
+        .guidelines-panel {
+            background-color: var(--white);
+            border: 1px solid var(--gray-200);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .guidelines-panel h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .guidelines-panel h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .guidelines-intro {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+        }
+
+        .guidelines-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .guidelines-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            line-height: 1.5;
+        }
+
+        .guidelines-list li::before {
+            content: '💡';
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .guidelines-list strong {
+            display: block;
+            color: var(--gray-900);
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .guidelines-footer-note {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--gray-200);
+            font-size: 0.875rem;
+            color: var(--gray-800);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* =========================================================
+           Estilos específicos para los Accordions del Lab
+           ========================================================= */
         .complexity-group {
             margin-bottom: 1.5rem;
             background: var(--white);
@@ -194,7 +275,54 @@
     </header>
 
     <main class="container" style="max-width: 900px;">
-        <h2 class="section-title" style="margin-bottom: 2rem;">Troubleshooting Lab</h2>
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Troubleshooting Lab</h2>
+
+        <!-- GUIDELINES SECTION ADDED HERE -->
+        <div class="guidelines-panel">
+            <h3>Complexity 4 - Mock Tickets</h3>
+            <h4>Guidelines</h4>
+            
+            <p class="guidelines-intro">
+                In this document, you’ll find seven Complexity 2 tasks, each containing a mock client ticket. For every task:
+            </p>
+
+            <ul class="guidelines-list">
+                <li>
+                    <div>
+                        <strong>Read the client’s message carefully.</strong>
+                        Try to fully understand the problem or question they’re raising.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Demonstrate product knowledge.</strong>
+                        Each task is designed to assess how well you understand our platform and features.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Write a client-facing response directly under each task.</strong>
+                        Your answer should provide clear suggestions, explanations, and a proposed resolution.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Do not perform any changes on the client’s site. We don’t want incidents!</strong>
+                        Remember that you must encourage clients to perform adjustments themselves.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>When in doubt… Test it out!</strong>
+                        If you think you need to confirm your assumptions, try to replicate the case!
+                    </div>
+                </li>
+            </ul>
+
+            <div class="guidelines-footer-note">
+                <span>💬</span> If you have any questions or need clarification, please sync with your Glia mentors. They will review any open questions with you through the dedicated channels.
+            </div>
+        </div>
 
         <!-- Complexity 2 -->
         <details class="complexity-group">
@@ -371,12 +499,12 @@ site_id=a4aab2f9-e9b6-4a6c-8741-1f3130fc733a \</div>
 
     </main>
 
-        <footer class="footer">
-            <p>Found an issue with the toolkit? 🧰<br> Report it
-                <a href="https://salemove.slack.com/archives/C0AC1SCTZ62" target="_blank"
-                    rel="noopener noreferrer">here</a>
-            </p>
-        </footer>
+    <footer class="footer">
+        <p>Found an issue with the toolkit? 🧰<br> Report it
+            <a href="https://salemove.slack.com/archives/C0AC1SCTZ62" target="_blank"
+                rel="noopener noreferrer">here</a>
+        </p>
+    </footer>
 
 </body>
 </html>
